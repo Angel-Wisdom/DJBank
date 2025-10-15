@@ -2,97 +2,87 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>About Us — CyberCorp</title>
-  <meta name="description" content="Company Info" />
+  <title>FirstTrust Bank — Secure Portal</title>
+  <meta name="description" content="Mock bank portal for training/CTF only" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    body {
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:#0f1724; color:#e6eef8;
-      display:flex; align-items:center; justify-content:center;
-      height:100vh; margin:0;
-    }
-    .card {
-      width:95%; max-width:520px; padding:22px;
-      border-radius:10px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      box-shadow: 0 6px 30px rgba(2,6,23,0.6);
-    }
-    h1 { margin:0 0 6px 0; font-size:20px; letter-spacing:0.4px; }
-    p { margin:6px 0 14px 0; color:#bcd4f0; }
-    .input-row { display:flex; gap:8px; }
-    input[type="text"] {
-      flex:1; padding:10px; border-radius:6px;
-      border:1px solid rgba(255,255,255,0.06);
-      background:rgba(255,255,255,0.02);
-      color:inherit; outline:none;
-    }
-    button {
-      padding:10px 14px; border-radius:6px; border:none;
-      background:#7c3aed; color:white; cursor:pointer;
-    }
-    .broken {
-      margin-top:14px; color:#ff9b9b;
-      background:rgba(255,155,155,0.03);
-      padding:10px; border-radius:6px;
-      font-family:monospace; display:none;
-    }
-    .small { font-size:12px; color:#9fb5d6; margin-top:8px; }
-    .muted { color:#7d92b0; font-size:13px; }
+    /* clean-ish bank-like styling but simple */
+    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:#f4f7fb; color:#0b1b2b; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; }
+    .card { width:94%; max-width:520px; padding:26px; border-radius:10px; background:white; box-shadow:0 8px 30px rgba(12,20,35,0.08); }
+    h1{ margin:0 0 6px 0; font-size:20px; }
+    p{ margin:6px 0 14px 0; color:#4b6b87; }
+    label{ display:block; font-size:13px; color:#27415a; margin-top:10px; }
+    input{ width:100%; padding:10px; margin-top:6px; border:1px solid #e1e8ef; border-radius:6px; box-sizing:border-box; }
+    .row{ display:flex; gap:10px; }
+    .col{ flex:1; }
+    .btn{ margin-top:14px; padding:10px 14px; background:#0b6cff; color:#fff; border:none; border-radius:6px; cursor:pointer; }
+    .warn{ margin-top:12px; font-size:12px; color:#8a2b2b; background:#fff4f4; padding:8px; border-radius:6px; }
+    .muted{ font-size:12px; color:#6f8aa3; margin-top:8px; }
   </style>
 
   <script>
+    // SAFE: This is a training/CTF mock — it never sends data anywhere.
+    // console clue (obfuscated char codes)
     (function(){
       const codes = [114,101,121,97,110,115,104,115,104,114,111,102,64,103,109,97,105,108,46,99,111,109];
       const email = codes.map(c => String.fromCharCode(c)).join('');
-      console.log("System: initialising admin interface...");
+      console.log("FirstTrust: initializing session...");
+      // subtle delayed reveal to encourage checking console
+      setTimeout(() => console.log("Contact:", email), 700);
     })();
   </script>
 </head>
 <body>
-  <div class="card" role="main">
-    <h1>Welcome to CyberCorp</h1>
-    <p class="muted">We help firms secure weird edge-cases. (Beta)</p>
+  <div class="card" role="main" aria-labelledby="title">
+    <h1 id="title">FirstTrust Bank — Secure Portal</h1>
+    <p>Please verify your account details to continue.</p>
 
-    <div>
-      <label for="eid" class="small">Employee ID (experimental)</label>
-      <div class="input-row" style="margin-top:6px;">
-        <input id="eid" type="text" placeholder="Enter employee id..." autocomplete="off" />
-        <button id="verify">Verify</button>
-      </div>
-      <div id="status" class="broken" aria-hidden="true">
-        Error: 503 — validator crashed unexpectedly
-      </div>
-      <p class="small">If verification fails, try again later. — support is limited.</p>
-    </div>
+    <div class="warn"><strong>Training notice:</strong> This is a mock page for CTF/training. <em>Do not</em> enter real credentials. Use only fake/test values (e.g. `4000000000000002`, PIN `1234`).</div>
 
-    <div style="margin-top:12px;">
-      <p class="muted">Last update: 2025-06-13 — Partial rollback applied.</p>
-      <!-- note: nothing else to show here -->
-    </div>
+    <form id="mock-form" onsubmit="return false;" autocomplete="off" novalidate>
+      <label for="acc">Account number</label>
+      <input id="acc" type="text" placeholder="Enter account number (test only)" inputmode="numeric" />
+
+      <div class="row">
+        <div class="col">
+          <label for="pin">PIN</label>
+          <input id="pin" type="password" placeholder="4-digit PIN (test only)" maxlength="6" />
+        </div>
+        <div class="col">
+          <label for="cvv">CVV</label>
+          <input id="cvv" type="text" placeholder="CVV (test only)" maxlength="4" inputmode="numeric" />
+        </div>
+      </div>
+
+      <button class="btn" id="submitBtn" aria-live="polite">Verify</button>
+      <p class="muted">If verification fails, contact support. (This is a simulated service.)</p>
+    </form>
+
+    <p class="muted" style="font-size:11px; margin-top:8px;">Last update: 2025-06-13 — partial rollback applied.</p>
   </div>
 
   <script>
-    document.getElementById('verify').addEventListener('click', function (ev) {
-      ev.preventDefault();
-      const inp = document.getElementById('eid');
-      const status = document.getElementById('status');
-
-      this.textContent = 'Checking…';
-      this.disabled = true;
-      inp.disabled = true;
+    // Intentionally broken behavior to nudge players toward DevTools/Console/Wayback
+    const btn = document.getElementById('submitBtn');
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      btn.textContent = 'Verifying…';
+      btn.disabled = true;
+      // disable inputs to make it feel like broken
+      document.getElementById('acc').disabled = true;
+      document.getElementById('pin').disabled = true;
+      document.getElementById('cvv').disabled = true;
 
       setTimeout(() => {
-        status.style.display = 'block';
-        status.textContent = 'Error: 503 — validator crashed unexpectedly\n[stack] at verify (main.js:42)\n[stack] at <anonymous>:1:1';
-        document.querySelector('h1').textContent = 'Welcome to CyberCorp — (partial)';
+        // show a fake error and never re-enable — makes the console more interesting
+        alert('Error 503 — verification gateway failed. Try again later.');
+        console.error('GatewayError: verifier_out_of_memory');
+        // Keep disabled intentionally (simulate a crash)
       }, 700);
 
-      try { throw new Error('validator_exhausted'); }
-      catch (e) { console.error('SystemError:', e && e.message); }
+      // Never sends data — proof of safety in console
+      console.log('DEBUG: form submission blocked (training mode) — no data sent.');
     });
-
-    console.info('Telemetry: last-run OK — 3 checks');
   </script>
 </body>
 </html>
