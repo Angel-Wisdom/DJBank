@@ -7,9 +7,7 @@ This project is intentionally simple and intended **only for learning and demo p
 ---
 
 ## Demo
-A static demo of the UI is available in the `docs/` folder (or at the hosted demo link if included in this repo).  
-If you find the live demo, check the footer — there’s a small Easter egg related to the EchoTrace project.
-
+Check it out at : https://djbank.vercel.app/
 ---
 
 ## Features
