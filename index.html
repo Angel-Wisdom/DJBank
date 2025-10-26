@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>FirstTrust Bank — Secure Portal</title>
+  <title>DJ Bank — Secure Portal</title>
   <meta name="description" content="Mock bank portal for training/CTF only" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
@@ -21,23 +21,17 @@
   </style>
 
   <script>
-    // SAFE: This is a training/CTF mock — it never sends data anywhere.
-    // console clue (obfuscated char codes)
     (function(){
-      const codes = [114,101,121,97,110,115,104,115,104,114,111,102,64,103,109,97,105,108,46,99,111,109];
-      const email = codes.map(c => String.fromCharCode(c)).join('');
-      console.log("FirstTrust: initializing session...");
-      // subtle delayed reveal to encourage checking console
-      setTimeout(() => console.log("Contact:", email), 700);
+      console.log("DJ: initializing session...");
     })();
   </script>
 </head>
 <body>
   <div class="card" role="main" aria-labelledby="title">
-    <h1 id="title">FirstTrust Bank — Secure Portal</h1>
+    <h1 id="title">DJ Bank — Secure Portal</h1>
     <p>Please verify your account details to continue.</p>
 
-    <div class="warn"><strong>Training notice:</strong> This is a mock page for CTF/training. <em>Do not</em> enter real credentials. Use only fake/test values (e.g. `4000000000000002`, PIN `1234`).</div>
+    <div class="warn"><strong>Training notice:</strong> This is a mock page in development...</div>
 
     <form id="mock-form" onsubmit="return false;" autocomplete="off" novalidate>
       <label for="acc">Account number</label>
@@ -55,32 +49,26 @@
       </div>
 
       <button class="btn" id="submitBtn" aria-live="polite">Verify</button>
-      <p class="muted">If verification fails, contact support. (This is a simulated service.)</p>
+      <p class="muted">If verification fails, contact support. </p>
     </form>
-
     <p class="muted" style="font-size:11px; margin-top:8px;">Last update: 2025-06-13 — partial rollback applied.</p>
   </div>
 
   <script>
-    // Intentionally broken behavior to nudge players toward DevTools/Console/Wayback
     const btn = document.getElementById('submitBtn');
     btn.addEventListener('click', function(e){
       e.preventDefault();
       btn.textContent = 'Verifying…';
       btn.disabled = true;
-      // disable inputs to make it feel like broken
       document.getElementById('acc').disabled = true;
       document.getElementById('pin').disabled = true;
       document.getElementById('cvv').disabled = true;
 
       setTimeout(() => {
-        // show a fake error and never re-enable — makes the console more interesting
         alert('Error 503 — verification gateway failed. Try again later.');
         console.error('GatewayError: verifier_out_of_memory');
-        // Keep disabled intentionally (simulate a crash)
       }, 700);
 
-      // Never sends data — proof of safety in console
       console.log('DEBUG: form submission blocked (training mode) — no data sent.');
     });
   </script>
